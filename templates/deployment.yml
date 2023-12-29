@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment-v2
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-my-app-v2
+  strategy:
+    rollingUpdate:
+      maxSurge: {{ .Values.deploymentStrategy.rollingUpdate.maxSurge }}
+      maxUnavailable: {{ .Values.deploymentStrategy.rollingUpdate.maxUnavailable }}
+    type: {{ .Values.deploymentStrategy.type }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-my-app-v2
+    spec:
+      #nodeSelector:
+      # app: my-app
+      containers:
+      - image: {{ .Values.images.repository_nginx }}
+        name: {{ .Values.images.repository_nginx }}
+        ports:
+        - containerPort: {{ .Values.container_port }}
+        resources:
+          requests:
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.requests.memory }}
+          limits:
+            cpu: {{ .Values.resources.limits.cpu }}
+            memory: {{ .Values.resources.limits.memory }}
+        volumeMounts:
+          - name: configmap-vol
+            mountPath: /usr/share/nginx/html/index.html
+            subPath: index.html   # Place in container
+            # - name: shared-volume
+          #    mountPath: /var/www/html
+      volumes:
+        - name: configmap-vol
+          configMap:
+            name: {{ .Release.Name }}-configmap-v2
+            #  - name: shared-volume
+            # persistentVolumeClaim:
+            # claimName: shared-volume-claim
