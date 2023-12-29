@@ -28,7 +28,7 @@
 
 ## 💻 Languages and Tools:
 
-![MySQL](https://img.shields.io/badge/mysql-%2300000f.svg?style=flat&logo=mysql&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=flat&logo=kubernetes&logoColor=white)
 
 
 # 📊 GitHub and More ✨ ):
