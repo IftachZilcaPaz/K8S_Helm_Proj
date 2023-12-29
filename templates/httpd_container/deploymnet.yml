@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment-v1
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-my-app-v1
+  strategy:
+    rollingUpdate:
+      maxSurge: {{ .Values.deploymentStrategy.rollingUpdate.maxSurge }}
+      maxUnavailable: {{ .Values.deploymentStrategy.rollingUpdate.maxUnavailable }}
+    type: {{ .Values.deploymentStrategy.type }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-my-app-v1
+    spec:
+      #nodeSelector:
+      # app: my-app
+      containers:
+      - image: {{ .Values.images.repository_httpd }}
+        name: {{ .Values.images.repository_httpd }}
+        ports:
+        - containerPort: {{ .Values.container_port }}
+        resources:
+          requests:
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.requests.memory }}
+          limits:
+            cpu: {{ .Values.resources.limits.memory }}
+            memory: {{ .Values.resources.limits.memory }}
+        volumeMounts:
+          - name: vol
+            mountPath: /var/www/html # /data
+            subPath: index.html
+      volumes:
+         - name: vol
+           persistentVolumeClaim:
+             claimName: my-pvc
