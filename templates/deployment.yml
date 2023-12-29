@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-mysql
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-mysql
+    spec:
+      containers:
+        - name: {{ .Values.images.repository_mysql }}
+          image: {{ .Values.images.repository_mysql }}:latest  # You can choose a specific version of MySQL
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-mysql-pass
+                  key: password
+          ports:
+            - containerPort: {{ .Values.container_mysql_port }}  # MySQL port
+          volumeMounts:
+            - name: config-volume
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: config-volume
+          configMap:
+            name: mysql-config
