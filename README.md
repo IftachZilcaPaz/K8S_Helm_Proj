@@ -114,8 +114,6 @@ If you would like to contribute to this project, please fork the repository and 
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-Replace placeholders like `your-username`, `your-repo`, and `chart-directory` with the actual values corresponding to your repository and Helm chart directory. This template should provide a comprehensive overview and instructions for your project.
-
 
 
 
