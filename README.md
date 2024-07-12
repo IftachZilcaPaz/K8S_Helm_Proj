@@ -32,7 +32,7 @@
 # 📊 GitHub and More ✨ ):
 
 <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical" align="right" width="500"/>
-
+<br/><br/><br/><br/>
 
 # Helm Chart for Creating HTTPD, MySQL, and NGINX Pods
 
