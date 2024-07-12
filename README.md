@@ -34,7 +34,7 @@
 <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=radical" align="right" width="500"/>
 <br/><br/><br/><br/>
 
-# Helm Chart for Creating HTTPD, MySQL, and NGINX Pods
+# Helm Chart for Creating HTTPD, MySQL, and NGINX Pods.
 
 This Helm chart project creates a Kubernetes deployment consisting of three pods, each running a container: one HTTPD (Apache), one MySQL, and one NGINX.
 
